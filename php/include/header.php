@@ -1,7 +1,3 @@
-<?php 
-    session_start();
-
-    echo '
     <html>
         <head>
             <title>Dashboard</title>
@@ -9,7 +5,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
             <!-- Latest compiled and minified CSS -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
-
+            <link rel="stylesheet" href="../css/gallery.css" />
             <!-- jQuery library -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -29,12 +25,23 @@
                                 <p class="text-muted">Join MoWe and become a part of creating the ultimate list of movies! Your ratings will impact the world’s frontrunners in all of cinema history. In addition to rating movies, you will also be able to sort them and explore new top films. Our service is and will always be completely free of charge. Join us today if you are a motion picture enthusiast!</p>
                             </div>
                             <div class="col-sm-4 offset-md-1 py-4 text-right">';
+                            <?php
                                 if ($_SESSION['user'] == true) {
-                                    echo '<a href="user_detail.php" class="text-decoration-none"><h4 class="text-white">My Account</h4></a>';
+                                    echo '
+                                        <a href="logout.php" class="text-decoration-none">
+                                            <h4 class="text-white">Logout</h4>
+                                        </a>
+                                        <a href="formular_change_password.php" class="text-decoration-none">
+                                            <h4 class="text-white">Change Password</h4>
+                                        </a>
+                                        <a href="delete_user.php" class="text-decoration-none">
+                                            <h4 class="error">Delete Account</h4>
+                                        </a>
+                                    ';
                                 } else {
                                     echo '<a href="formular_login.php" class="text-decoration-none"><h4 class="text-white">Login</h4></a>';
                                 }
-                                echo '
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -54,27 +61,4 @@
                     </div>
                 </div>
             </header>
-            <main>
-                <div class="container p-5 text-center">
-                <img class="mb-4" src="..\test_images\naechster.png" alt="" width="72" height="72">
-                    <h1>Wellcome user</h1>
-                </div>
-                <div class="text-center container-sm d-flex justify-content-center">
-                    <div class="col-7 p-5 text-center">
-                        <a class="text-decoration-none" href="formular_change_password.php"><button class="btn btn-primary btn-block">Change password</button></a>
-                        <a class="text-decoration-none" href="logout.php"><button class="btn btn-primary btn-block mt-4">Logout</button></a>
-                        <a class="text-decoration-none" href="delete_user.php"><button class="btn btn-primary btn-block mt-4">Delete Account</button></a>
-                    </div>
-                </div>
-            </main>
-            <footer class="text-muted">
-                <div class="container">
-                    <p class="float-right">
-                        <a class="text-decoration-none" href="#">Back to top</a>
-                    </p>
-                    <p>&copy;MoWe </p>
-                </div>
-            </footer>
-        </body>
-    </html>';
-?>
+            
