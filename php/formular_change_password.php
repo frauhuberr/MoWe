@@ -59,7 +59,7 @@
                 echo'
             <main>
                 <div class="container p-5 text-center">
-                <img class="mb-4" src="\M133\LB\projekt_modul133\test_images\naechster.png" alt="" width="72" height="72">
+                <img class="mb-4" src="..\test_images\naechster.png" alt="" width="72" height="72">
                     <h1>Wellcome user</h1>
                 </div>
                 <div class="text-center container-m p-5 d-flex justify-content-center">
