@@ -63,6 +63,7 @@ CREATE TABLE userLOG (
     user_pk int NOT NULL AUTO_INCREMENT,
     firstName varchar(30),
     lastName varchar(30),
+    email varchar(30),
     password varchar(30),
     rank_fk int,
     date DATETIME,

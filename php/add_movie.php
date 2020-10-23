@@ -37,8 +37,8 @@ include("include/header.php");
                         </div>
 
                         <div class="form-group col-md p-0">
-                            <label class="sr-only" for="producer">Producer</label>
-                            <input type="text" id="producer" class="form-control" name="producer" placeholder="Producer" />
+                            <label class="sr-only" for="director">Director</label>
+                            <input type="text" id="director" class="form-control" name="producer" placeholder="Director" />
                         </div>
                         <div class="form-group col-md p-0">
                             <label class="sr-only" for="actor">Main Actor</label>
