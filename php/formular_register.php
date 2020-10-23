@@ -5,11 +5,11 @@
   include("include/header.php");
   
       if (isset($_REQUEST["fehler"])) {
-        echo "Es wurden nicht alle Felder ausgefüllt.";
+        echo "Please fill out all fields.";
       }
 
       if (isset($_REQUEST["registration"])) {
-        echo "Bereits Registriert.";
+        echo "User already exists.";
       }
       echo'
       <main>
@@ -21,22 +21,18 @@
           <form action="register.php" method="post">
             <div class="row">
               <div class="form-group col-md">
-                <label class="sr-only" for="vorname">Vorname</label>
-                <input type="text" id="vorname" class="form-control" name="vorname" placeholder="Vorname" />
+                <input type="text" class="form-control" name="vorname" placeholder="First name" />
               </div>
               <div class="form-group col-md">
-                <label class="sr-only" for="nachname">Nachname</label>
-                <input type="text" id="nachname" class="form-control" name="nachname" placeholder="Nachname" />
+                <input type="text" class="form-control" name="nachname" placeholder="Last name" />
               </div>
             </div>
             <div class="row">
               <div class="form-group col-md">
-                <label class="sr-only" for="email">E-Mail</label>
-                <input type="text" id="email" class="form-control" name="email" placeholder="Email" />
+                <input type="text" class="form-control" name="email" placeholder="Email" />
               </div>
               <div class="form-group col-md">
-                <label class="sr-only" for="pwd">Kennwort</label>
-                <input type="password" id="pwd" class="form-control" name="pwd" placeholder="Passwort" />
+                <input type="password" class="form-control" name="pwd" placeholder="Password" />
               </div>
             </div>
             <br>

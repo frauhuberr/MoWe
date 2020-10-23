@@ -16,7 +16,7 @@
         $hashPassword = password_hash($password, PASSWORD_DEFAULT);
         $sql = "UPDATE movieuser SET password = '$hashPassword' WHERE email = '$email'";
         mysqli_query($con, $sql);
-        header("Location: user_detail.php");
+        header("Location: index.php");
     }else{
         header("Location: formular_change_password.php?error=1");
     }
