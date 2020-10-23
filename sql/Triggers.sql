@@ -7,7 +7,7 @@ BEGIN
     INSERT INTO userLOG
     SET 
     user_pk = OLD.user_pk,
-    firsName = OLD.firstName,
+    firstName = OLD.firstName,
     lastName = OLD.lastName,
     email = OLD.email,
     password = OLD.password,
@@ -26,7 +26,7 @@ BEGIN
     INSERT INTO userLOG
     SET 
     user_pk = OLD.user_pk,
-    firsName = OLD.firstName,
+    firstName = OLD.firstName,
     lastName = OLD.lastName,
     email = OLD.email,
     password = OLD.password,

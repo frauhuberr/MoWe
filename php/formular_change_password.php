@@ -16,12 +16,10 @@
                     <form class="col-4" action="change_password.php" method="post">
                         <div>
                             <div class="form-group">
-                                <label for="pwd" class="sr-only">Enter new password</label>
-                                <input type="password" id="pwd" class="form-control" placeholder="Enter new password" name="pwd" required autofocus>
+                                <input type="password" class="form-control" placeholder="Enter new password" name="pwd" required autofocus>
                             </div>
                             <div class="form-group">
-                                <label for="pwd_new" class="sr-only">Repeat password</label>
-                                <input type="password" id="pwd_new" class="form-control" placeholder="Repete password" name="pwd_new" required>
+                                <input type="password" class="form-control" placeholder="Repeat password" name="pwd_new" required>
                             </div>
                             <br>
                             <input class="btn btn-primary btn-block" type="submit" value="CHANGE" id="change_pwd" name="change_pwd">
