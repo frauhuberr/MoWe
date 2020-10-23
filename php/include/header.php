@@ -45,7 +45,7 @@
                                     <a href="formular_change_password.php" class="text-decoration-none">
                                         <h4 class="text-white">Change Password</h4>
                                     </a>
-                                    <a href="delete_user.php" data-confirm="Are you sure you want to load this URL?" class="text-decoration-none">
+                                    <a href="delete_user.php" data-confirm="Are you sure you want to delete your account?" class="text-decoration-none">
                                         <h4 class="error">Delete Account</h4>
                                     </a>
                                 ';
