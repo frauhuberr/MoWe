@@ -136,7 +136,7 @@
                                         if ($_SESSION['admin'] == true) {
                                             echo '
                                             <div class="pr-3 pl-3 pb-3">
-                                                <a href="delete_movie.php?pk='.$row["movie_pk"].'"><button class="btn btn-danger btn-sm btn-block rounded-pill">delete Movie</button></a>
+                                            <a href="delete_movie.php?pk='.$row["movie_pk"].'" class="btn btn-danger btn-sm btn-block rounded-pill" data-confirm="Are you sure you want to delete this movie?">delete Movie</a>
                                             </div>';
                                         } else {
                                             echo '';
@@ -251,7 +251,7 @@
                                         if ($_SESSION['admin'] == true) {
                                             echo '
                                             <div class="pr-3 pl-3 pb-3">
-                                                <a href="delete_movie.php?pk='.$row["movie_pk"].'" data-confirm="Are you sure you want to delete this movie?"><button class="btn btn-danger btn-sm btn-block rounded-pill">delete Movie</button></a>
+                                                <a href="delete_movie.php?pk='.$row["movie_pk"].'" class="btn btn-danger btn-sm btn-block rounded-pill" data-confirm="Are you sure you want to delete this movie?">delete Movie</a>
                                             </div>';
                                         } else {
                                             echo '';
@@ -366,7 +366,7 @@
                                         if ($_SESSION['admin'] == true) {
                                             echo '
                                             <div class="pr-3 pl-3 pb-3">
-                                                <a href="delete_movie.php?pk='.$row["movie_pk"].'"><button class="btn btn-danger btn-sm btn-block rounded-pill">delete Movie</button></a>
+                                            <a href="delete_movie.php?pk='.$row["movie_pk"].'" class="btn btn-danger btn-sm btn-block rounded-pill" data-confirm="Are you sure you want to delete this movie?">delete Movie</a>
                                             </div>';
                                         } else {
                                             echo '';
@@ -481,7 +481,7 @@
                                         if ($_SESSION['admin'] == true) {
                                             echo '
                                             <div class="pr-3 pl-3 pb-3">
-                                                <a href="delete_movie.php?pk='.$row["movie_pk"].'"><button class="btn btn-danger btn-sm btn-block rounded-pill">delete Movie</button></a>
+                                            <a href="delete_movie.php?pk='.$row["movie_pk"].'" class="btn btn-danger btn-sm btn-block rounded-pill" data-confirm="Are you sure you want to delete this movie?">delete Movie</a>
                                             </div>';
                                         } else {
                                             echo '';
