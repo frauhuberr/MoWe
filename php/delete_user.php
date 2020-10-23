@@ -20,7 +20,7 @@
     mysqli_query($con, $sql);
 
     // löschen des users
-    $sql = "DELETE FROM movieuser WHERE email = '$email'";
+    $sql = "DELETE FROM movieuser WHERE user_pk = $user_pk";
     mysqli_query($con, $sql);
     session_destroy();
     header("Location: index.php");
