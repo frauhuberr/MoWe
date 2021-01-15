@@ -21,96 +21,98 @@
     $g = "";
 
     //Prüfen ob Film bereits existiert
-    $sql = "SELECT * FROM movie WHERE (name = ?)";
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param("s", $movieName);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if (mysqli_num_rows($result) == 0) {
+    if(hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])){
+        $sql = "SELECT * FROM movie WHERE (name = ?)";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("s", $movieName);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if (mysqli_num_rows($result) == 0) {
 
-        //Formular prüfen
-        $error = false;
-        if ($movieName == "") {
-            $error = true;
-        }
+            //Formular prüfen
+            $error = false;
+            if ($movieName == "") {
+                $error = true;
+            }
 
-        if ($year == "") {
-            $error = true;
-        }
+            if ($year == "") {
+                $error = true;
+            }
 
-        if ($age == "") {
-            $error = true;
-        }
+            if ($age == "") {
+                $error = true;
+            }
 
-        if ($producer == "") {
-            $error = true;
-        }
+            if ($producer == "") {
+                $error = true;
+            }
 
-        if ($actor == "") {
-            $error = true;
-        }
+            if ($actor == "") {
+                $error = true;
+            }
 
-        if ($imageUrl == "") {
-            $error = true;
-        }
+            if ($imageUrl == "") {
+                $error = true;
+            }
 
-        if ($description == "") {
-            $error = true;
-        }
+            if ($description == "") {
+                $error = true;
+            }
 
-        if ($description_short == "") {
-            $error = true;
-        }
-        if ($genre == "") {
-            $error = true;
-        }
+            if ($description_short == "") {
+                $error = true;
+            }
+            if ($genre == "") {
+                $error = true;
+            }
 
-        if ($error == true) {
-            header('X-Content-Type-Options: nosniff');
-            header("Location: add_movie.php?fehler=1");
-        } else {
-            // Werte in die Datenbank füllen
-            try {
-                $sql = "INSERT INTO movie (name, yearpublished, producer, imageURL, description, fsk, mainActor, description_short) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $con->prepare($sql);
-                $stmt->bind_param("sisssiss", $movieName, $year, $producer, $imageUrl, $description, $age, $actor, $description_short);
-                $stmt->execute();
-                
-                $sql = "SELECT * FROM movie WHERE name = ?";
-                $stmt = $con->prepare($sql);
-                $stmt->bind_param("s", $movieName);
-                $stmt->execute();
-
-                $result = $stmt->get_result();
-                $data = $result->fetch_assoc();
-                $movie_pk = $data['movie_pk'];
-
-                foreach ($genre as $g) {
-                    $sql = "SELECT genre_pk FROM genre WHERE name = ?";
+            if ($error == true) {
+                header('X-Content-Type-Options: nosniff');
+                header("Location: add_movie.php?fehler=1");
+            } else {
+                // Werte in die Datenbank füllen
+                try {
+                    $sql = "INSERT INTO movie (name, yearpublished, producer, imageURL, description, fsk, mainActor, description_short) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                     $stmt = $con->prepare($sql);
-                    $stmt->bind_param("s", $g);
+                    $stmt->bind_param("sisssiss", $movieName, $year, $producer, $imageUrl, $description, $age, $actor, $description_short);
+                    $stmt->execute();
+                    
+                    $sql = "SELECT * FROM movie WHERE name = ?";
+                    $stmt = $con->prepare($sql);
+                    $stmt->bind_param("s", $movieName);
                     $stmt->execute();
 
                     $result = $stmt->get_result();
                     $data = $result->fetch_assoc();
-                    $genre_pk = $data['genre_pk'];
+                    $movie_pk = $data['movie_pk'];
 
-                    $sql = "INSERT INTO movieGenre(movie_fk, genre_fk) VALUES(?, ?)";
-                    $stmt = $con->prepare($sql);
-                    $stmt->bind_param("ii", $movie_pk, $genre_pk);
-                    $stmt->execute();
+                    foreach ($genre as $g) {
+                        $sql = "SELECT genre_pk FROM genre WHERE name = ?";
+                        $stmt = $con->prepare($sql);
+                        $stmt->bind_param("s", $g);
+                        $stmt->execute();
 
+                        $result = $stmt->get_result();
+                        $data = $result->fetch_assoc();
+                        $genre_pk = $data['genre_pk'];
+
+                        $sql = "INSERT INTO movieGenre(movie_fk, genre_fk) VALUES(?, ?)";
+                        $stmt = $con->prepare($sql);
+                        $stmt->bind_param("ii", $movie_pk, $genre_pk);
+                        $stmt->execute();
+
+                    }
+                    header('X-Content-Type-Options: nosniff');
+                    header("Location: index.php");
+                } catch (Exception $e) {
+                    echo 'fail' . $sql . '<br>' . mysqli_error($con);
+                    header('X-Content-Type-Options: nosniff');
+                    header("Location: add_movie.php?fail=1");
                 }
-                header('X-Content-Type-Options: nosniff');
-                header("Location: index.php");
-            } catch (Exception $e) {
-                echo 'fail' . $sql . '<br>' . mysqli_error($con);
-                header('X-Content-Type-Options: nosniff');
-                header("Location: add_movie.php?fail=1");
             }
+        } else {
+            header('X-Content-Type-Options: nosniff');
+            header("Location: add_movie.php?exists=1");
         }
-    } else {
-        header('X-Content-Type-Options: nosniff');
-        header("Location: add_movie.php?exists=1");
     }
 ?>

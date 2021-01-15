@@ -7,6 +7,10 @@
     if (!isset($_SESSION['admin'])) {
         $_SESSION['admin'] = false;
     }
+    if(!isset($_SESSION['csrf_token'])){
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    
 
     $con = mysqli_connect('localhost', 'root', '', 'movielibrary');
     if (!mysqli_select_db($con, 'movielibrary')) {

@@ -25,6 +25,7 @@
                             <br>
                             <input class="btn btn-primary btn-block" type="submit" value="CHANGE" id="change_pwd" name="change_pwd">
                         </div>
+                        <input type="hidden" name="csrf_token" value="'.$_SESSION['csrf_token'].'"/>
                     </form>
                 </div>
             </main>

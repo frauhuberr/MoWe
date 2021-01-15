@@ -31,6 +31,7 @@
             <input class="btn btn-primary btn-block mb-3" type="submit" value="Login" id="login" name="login">        
             <p>Or register now</p>
             <a class="btn btn-secondary btn-block mt-3" type="button" href="formular_register.php" id="register">Register</a>
+            <input type="hidden" name="csrf_token" value="'.$_SESSION['csrf_token'].'"/>
           </form>
         </div>
       </main>

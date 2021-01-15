@@ -125,6 +125,7 @@ include("include/header.php");
                                 <a class="text-decoration-none btn btn-secondary cancel-btn" href="index.php">Cancel</a>
                             </div>
                         </div>
+                        <input type="hidden" name="csrf_token" value="'.$_SESSION['csrf_token'].'"/>
                     </form>
                 </div>
             </main>
