@@ -1,4 +1,5 @@
 <?php 
+    session_set_cookie_params(600,null,null,false,true);
     session_start();
     $con = mysqli_connect('localhost', 'root', '', 'movielibrary');
     if (!mysqli_select_db($con, 'movielibrary')) {

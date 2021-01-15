@@ -1,3 +1,8 @@
+<?php
+    error_reporting(0);
+    header("X-Frame-Options: SAMEORIGIN");
+    //echo test
+?>
 <html>
 
 <head>
@@ -23,6 +28,8 @@
             }
         });
     </script>
+
+    
 
 </head>
 
