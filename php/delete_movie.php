@@ -10,20 +10,27 @@
     $moviePK = $_REQUEST['pk'];
 
     // Fremdschlüssel löschen
-    $sql = "DELETE FROM hasranked WHERE movie_fk = $moviePK";
-    mysqli_query($con, $sql);
+    $sql = "DELETE FROM hasranked WHERE movie_fk = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("i", $moviePK);
+    $stmt->execute();
 
-    $sql = "DELETE FROM moviegenre WHERE movie_fk = $moviePK";
-    mysqli_query($con, $sql);
+    $sql = "DELETE FROM moviegenre WHERE movie_fk = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("i", $moviePK);
+    $stmt->execute();
 
     // Film löschen
-    $sql = "DELETE FROM movie WHERE movie_pk = $moviePK";
+    $sql = "DELETE FROM movie WHERE movie_pk = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("i", $moviePK);
+    $stmt->execute();
 
-    $result = mysqli_query($con,$sql);
-    if($result){
+    $result = $stmt->get_result();
+    
+    if(!$result){
         header("Location: index.php");
-    }
-    else{
+    }else{
         echo 'fail'.$sql.'<br>'.mysqli_error($con);
     }
 ?>

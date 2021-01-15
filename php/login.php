@@ -11,12 +11,15 @@
     $password = mysqli_real_escape_string($con, $_POST['pwd']);
 
     // User auslesen, mit der E-Mail welche angegeben wurde
-    $sql = "SELECT * FROM movieuser WHERE email = '$email'";
-    $result = mysqli_query($con, $sql);
-    $data = mysqli_fetch_assoc($result);
+    $sql = "SELECT * FROM movieuser WHERE email = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
 
     // Prüfen ob User existiert
-    if (mysqli_num_rows($result) < 1) {
+    if ($result->num_rows < 1) {
         header("Location: formular_login.php?error=1");
     } else {
         // Prüfen des Passwortes

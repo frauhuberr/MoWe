@@ -8,11 +8,18 @@
     include("include/header.php");
     
             $moviePk = $_REQUEST['pk'];
-            $sql = "SELECT * FROM movie WHERE movie_pk = $moviePk";
-            $movie = mysqli_query($con,$sql);
-            $movieRow = mysqli_fetch_array($movie);
-            $join = "SELECT g.name AS genre, m.* FROM genre g, movie m, movieGenre mg WHERE mg.movie_fk = m.movie_pk AND mg.genre_fk = g.genre_pk AND m.movie_pk = '$moviePk'";
-            $getGenres = mysqli_query($con,$join);
+            $sql = "SELECT * FROM movie WHERE movie_pk = ?";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("i", $moviePk);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $movieRow = $result->fetch_assoc();
+
+            $sql = "SELECT g.name AS genre, m.* FROM genre g, movie m, movieGenre mg WHERE mg.movie_fk = m.movie_pk AND mg.genre_fk = g.genre_pk AND m.movie_pk = ?";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("i", $moviePk);
+            $stmt->execute();
+            $result = $stmt->get_result();
             echo '
             <main role="main">
                 <div class="container p-5">
@@ -46,7 +53,7 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">Genre</th>';
-                                            while($g = mysqli_fetch_assoc($getGenres)){
+                                            while($g = $result->fetch_assoc()){
                                                 echo '<td>'.$g['genre'].'</td>'; 
                                             }
                                             echo'  

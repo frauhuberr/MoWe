@@ -13,9 +13,12 @@
     $password = mysqli_real_escape_string($con, $_POST['pwd']);
 
     // Prüfen ob der User bereits registriert ist
-    $sql = "SELECT * FROM movieuser WHERE (firstName = '$firstname' AND lastName = '$lastname') OR email = '$email'";
-    $result = mysqli_query($con, $sql);
-    if(mysqli_num_rows($result) == 0){
+    $sql = "SELECT * FROM movieuser WHERE (firstName = ? AND lastName = ?) OR email = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("sss", $firstname, $lastname, $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows == 0){
         // Prüfen ob Formular korrekt ausgefüllt wurde
         $error = false;
         if($firstname == ""){
@@ -39,15 +42,19 @@
         }else{
             // User in Datenbank generieren
             $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO movieuser (firstName, lastName, password, email, rank_fk) VALUES ('$firstname', '$lastname', '$hashPassword', '$email', 1)";
-            $result = mysqli_query($con, $sql);
-            if($result){
+            $rank_ID = 1;
+            $sql = "INSERT INTO movieuser (firstName, lastName, password, email, rank_fk) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("ssssi", $firstname, $lastname, $hashPassword, $email, $rank_ID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if(!$result){
                 $_SESSION['user'] = true;
                 $_SESSION['email'] = $email;
                 header("Location: index.php");
             }
             else{
-                echo 'fail'.$sql.'<br>'.mysqli_error($con);
+                echo 'fail '.$sql.'<br>'.mysqli_error($con);
             }   
         }
     }else{

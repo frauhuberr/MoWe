@@ -19,8 +19,11 @@
     $g = "";
 
     //Prüfen ob Film bereits existiert
-    $sql = "SELECT * FROM movie WHERE (name = '$movieName')";
-    $result = mysqli_query($con, $sql);
+    $sql = "SELECT * FROM movie WHERE (name = ?)";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $movieName);
+    $stmt->execute();
+    $result = $stmt->get_result();
     if (mysqli_num_rows($result) == 0) {
 
         //Formular prüfen
@@ -65,21 +68,35 @@
         } else {
             // Werte in die Datenbank füllen
             try {
-                $insertMovie = "INSERT INTO movie (name, yearpublished, producer, imageURL, description, fsk, mainActor, description_short) VALUES ('$movieName', '$year', '$producer', '$imageUrl', '$description', '$age','$actor', '$description_short')";
-                mysqli_query($con, $insertMovie);
-                $getMovie = "SELECT * FROM movie WHERE name = '$movieName'";
-                $res = mysqli_query($con, $getMovie);
-                $data = mysqli_fetch_assoc($res);
+                $sql = "INSERT INTO movie (name, yearpublished, producer, imageURL, description, fsk, mainActor, description_short) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("sisssiss", $movieName, $year, $producer, $imageUrl, $description, $age, $actor, $description_short);
+                $stmt->execute();
+                
+                $sql = "SELECT * FROM movie WHERE name = ?";
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("s", $movieName);
+                $stmt->execute();
+
+                $result = $stmt->get_result();
+                $data = $result->fetch_assoc();
                 $movie_pk = $data['movie_pk'];
 
                 foreach ($genre as $g) {
-                    $getGenre = "SELECT genre_pk FROM genre WHERE name = '$g'";
-                    $showGenre = mysqli_query($con, $getGenre);
-                    $data = mysqli_fetch_assoc($showGenre);
+                    $sql = "SELECT genre_pk FROM genre WHERE name = ?";
+                    $stmt = $con->prepare($sql);
+                    $stmt->bind_param("s", $g);
+                    $stmt->execute();
+
+                    $result = $stmt->get_result();
+                    $data = $result->fetch_assoc();
                     $genre_pk = $data['genre_pk'];
 
-                    $sql = "INSERT INTO movieGenre(movie_fk, genre_fk) VALUES($movie_pk, $genre_pk)";
-                    mysqli_query($con, $sql);
+                    $sql = "INSERT INTO movieGenre(movie_fk, genre_fk) VALUES(?, ?)";
+                    $stmt = $con->prepare($sql);
+                    $stmt->bind_param("ii", $movie_pk, $genre_pk);
+                    $stmt->execute();
+
                 }
                 header("Location: index.php");
             } catch (Exception $e) {
