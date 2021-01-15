@@ -2,7 +2,6 @@
     error_reporting(0);
     header('X-Content-Type-Options: nosniff');
     header("X-Frame-Options: SAMEORIGIN");
-    //echo test
 ?>
 <html>
 

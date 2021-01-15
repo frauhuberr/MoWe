@@ -1,8 +1,8 @@
 <?php 
     // Session Anbindung + Datenbankverbindung
-    error_reporting(0);
     session_set_cookie_params(600,null,null,false,true);
     session_start();
+    error_reporting(0);
     $con = mysqli_connect('localhost', 'root', '', 'movielibrary');
     if (!mysqli_select_db($con, 'movielibrary')) {
         die("Keine Verbindung zur Datenbank");
