@@ -1,5 +1,6 @@
 <?php
     error_reporting(0);
+    header('X-Content-Type-Options: nosniff');
     header("X-Frame-Options: SAMEORIGIN");
     //echo test
 ?>
@@ -11,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css/gallery.css" />
+    <link rel="stylesheet" href="../css/gallery.css" header='X-Content-Type-Options: nosniff' />
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

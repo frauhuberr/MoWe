@@ -6,6 +6,7 @@
     error_reporting(0);
     session_unset ();
     session_destroy ();
+    header('X-Content-Type-Options: nosniff');
     header ("Location: index.php");
     ob_end_flush ();
 ?> 

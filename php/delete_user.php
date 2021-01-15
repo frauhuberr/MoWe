@@ -32,5 +32,6 @@
     $stmt->bind_param("i", $user_pk);
     $stmt->execute();
     session_destroy();
+    header('X-Content-Type-Options: nosniff');
     header("Location: index.php");
 ?>

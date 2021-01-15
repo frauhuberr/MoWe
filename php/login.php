@@ -22,6 +22,7 @@
 
     // Prüfen ob User existiert
     if ($result->num_rows < 1) {
+        header('X-Content-Type-Options: nosniff');
         header("Location: formular_login.php?error=1");
     } else {
         // Prüfen des Passwortes
@@ -31,15 +32,18 @@
             if ($data['rank_fk'] == 1) {
                 $_SESSION['user'] = true;
                 $_SESSION['email'] = $email;
+                header('X-Content-Type-Options: nosniff');
                 header("Location: index.php");
             }if ($data['rank_fk'] == 2) {
                 $_SESSION['user'] = true;
                 $_SESSION['admin'] = true;
                 $_SESSION['email'] = $email;
+                header('X-Content-Type-Options: nosniff');
                 header("Location: index.php");
             }
             
         } else {
+            header('X-Content-Type-Options: nosniff');
             header("Location: formular_login.php?fehler=1");
         }
     }

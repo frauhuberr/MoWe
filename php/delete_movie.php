@@ -31,6 +31,7 @@
     $result = $stmt->get_result();
     
     if(!$result){
+        header('X-Content-Type-Options: nosniff');
         header("Location: index.php");
     }else{
         echo 'fail'.$sql.'<br>'.mysqli_error($con);

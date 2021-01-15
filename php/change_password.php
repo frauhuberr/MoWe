@@ -18,8 +18,10 @@
         $hashPassword = password_hash($password, PASSWORD_DEFAULT);
         $sql = "UPDATE movieuser SET password = '$hashPassword' WHERE email = '$email'";
         mysqli_query($con, $sql);
+        header('X-Content-Type-Options: nosniff');
         header("Location: index.php");
     }else{
+        header('X-Content-Type-Options: nosniff');
         header("Location: formular_change_password.php?error=1");
     }
 ?>  

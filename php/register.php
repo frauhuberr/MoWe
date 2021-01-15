@@ -40,6 +40,7 @@
         }
     
         if($error == true){
+            header('X-Content-Type-Options: nosniff');
             header("Location: formular_register.php?fehler=1");
         }else{
             // User in Datenbank generieren
@@ -53,6 +54,7 @@
             if(!$result){
                 $_SESSION['user'] = true;
                 $_SESSION['email'] = $email;
+                header('X-Content-Type-Options: nosniff');
                 header("Location: index.php");
             }
             else{
@@ -60,6 +62,7 @@
             }   
         }
     }else{
+        header('X-Content-Type-Options: nosniff');
         header("Location: formular_register.php?registration=1");
     }
 ?>

@@ -38,6 +38,7 @@
         $stmt->bind_param("ii", $user_pk, $movie_pk);
         $stmt->execute();
         $result = $stmt->get_result();
+        header('X-Content-Type-Options: nosniff');
         header("Location: index.php");
     }else{
         if($data['userDislike'] == 1){
@@ -46,6 +47,7 @@
             $stmt->bind_param("ii", $user_pk, $movie_pk);
             $stmt->execute();
             $result = $stmt->get_result();
+            header('X-Content-Type-Options: nosniff');
             header("Location: index.php");
         }else{
             $sql = "UPDATE hasranked SET userLike = 0, userDislike = 1 WHERE user_fk = ? AND movie_fk = ?";
@@ -53,6 +55,7 @@
             $stmt->bind_param("ii", $user_pk, $movie_pk);
             $stmt->execute();
             $result = $stmt->get_result();
+            header('X-Content-Type-Options: nosniff');
             header("Location: index.php");
         }
     }

@@ -66,6 +66,7 @@
         }
 
         if ($error == true) {
+            header('X-Content-Type-Options: nosniff');
             header("Location: add_movie.php?fehler=1");
         } else {
             // Werte in die Datenbank füllen
@@ -100,13 +101,16 @@
                     $stmt->execute();
 
                 }
+                header('X-Content-Type-Options: nosniff');
                 header("Location: index.php");
             } catch (Exception $e) {
                 echo 'fail' . $sql . '<br>' . mysqli_error($con);
+                header('X-Content-Type-Options: nosniff');
                 header("Location: add_movie.php?fail=1");
             }
         }
     } else {
+        header('X-Content-Type-Options: nosniff');
         header("Location: add_movie.php?exists=1");
     }
 ?>
